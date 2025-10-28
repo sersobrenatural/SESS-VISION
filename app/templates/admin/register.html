@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Registro - Admin SESS-Vision{% endblock %}
+
+{% block content %}
+<div class="admin-login-container">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <div class="logo-icon">🔐</div>
+                    <div class="logo-text">
+                        <span class="logo-main">SESS-VISION</span>
+                        <span class="logo-sub">REGISTRO ADMIN</span>
+                    </div>
+                </div>
+                <h1>Registro de Administrador</h1>
+                <p>Complete el formulario para crear una cuenta</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} show">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('main.admin_register') }}" class="login-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token }}">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" required class="form-control" 
+                           placeholder="Ingrese su nombre completo" 
+                           value="{{ request.form.nombre if request.form }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required class="form-control" 
+                           placeholder="ejemplo@correo.com" 
+                           value="{{ request.form.email if request.form }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Nombre de Usuario *</label>
+                    <input type="text" id="username" name="username" required class="form-control" 
+                           placeholder="Elija un nombre de usuario" 
+                           value="{{ request.form.username if request.form }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña *</label>
+                    <input type="password" id="password" name="password" required class="form-control" 
+                           placeholder="Mínimo 6 caracteres" 
+                           minlength="6">
+                    <small style="color: var(--text-light); font-size: 0.75rem; margin-top: 0.25rem; display: block;">
+                        La contraseña debe tener al menos 6 caracteres
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirmar Contraseña *</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required class="form-control" 
+                           placeholder="Repita la contraseña" 
+                           minlength="6">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text">Registrarse</span>
+                </button>
+                
+                <div class="login-footer">
+                    <p>¿Ya tienes cuenta? <a href="{{ url_for('main.admin_login') }}">Inicia sesión aquí</a></p>
+                    <p>&copy; 2024 SESS-Vision. Todos los derechos reservados.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,30 +4,29 @@ from werkzeug.security import generate_password_hash
 
 class Config:
     """Configuración base"""
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'your-production-secret-key-change-this')
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     STATIC_VERSION = datetime.now().strftime("%Y%m%d%H%M%S")
     
-    # Configuración de administrador
-    ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-    ADMIN_PASSWORD_HASH = generate_password_hash(
-        os.environ.get('ADMIN_PASSWORD', 'secure-admin-password-123')
-    )
+    # Configuración de base de datos
+    DATABASE_PATH = os.environ.get('DATABASE_URL', 'sqlite:///sessvision.db')
+    
+    # Configuración de seguridad
+    SESSION_COOKIE_SECURE = False  # Cambiar a True en producción con HTTPS
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
 
 class ProductionConfig(Config):
     """Configuración para producción"""
     DEBUG = False
     TESTING = False
     PREFERRED_URL_SCHEME = 'https'
-    
-    # Base de datos para producción
-    DATABASE_PATH = os.environ.get('DATABASE_URL', 'sqlite:///sessvision_prod.db')
+    SESSION_COOKIE_SECURE = True
 
 class DevelopmentConfig(Config):
     """Configuración para desarrollo"""
     DEBUG = True
     TESTING = False
-    DATABASE_PATH = 'sqlite:///sessvision_dev.db'
 
 class TestingConfig(Config):
     """Configuración para testing"""

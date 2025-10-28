@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}Solicitudes - Admin SESS-Vision{% endblock %}
+
+{% block content %}
+<div class="admin-solicitudes">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1>Gestión de Solicitudes</h1>
+            <p>Administre las solicitudes de servicios de los clientes</p>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-secondary">
+                ← Volver al Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-card">
+        <h3>Filtros y Ordenación</h3>
+        <form method="GET" class="filters-form">
+            <div class="filter-group">
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" onchange="this.form.submit()">
+                    <option value="todos" {% if filtro_estado == 'todos' %}selected{% endif %}>Todos los estados</option>
+                    <option value="pendiente" {% if filtro_estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                    <option value="contactado" {% if filtro_estado == 'contactado' %}selected{% endif %}>Contactado</option>
+                    <option value="cerrado" {% if filtro_estado == 'cerrado' %}selected{% endif %}>Cerrado</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" name="servicio" onchange="this.form.submit()">
+                    <option value="todos" {% if filtro_servicio == 'todos' %}selected{% endif %}>Todos los servicios</option>
+                    <option value="Video Vigilancia" {% if filtro_servicio == 'Video Vigilancia' %}selected{% endif %}>Video Vigilancia</option>
+                    <option value="Controles de Acceso" {% if filtro_servicio == 'Controles de Acceso' %}selected{% endif %}>Controles de Acceso</option>
+                    <option value="Alarmas de Intrusión" {% if filtro_servicio == 'Alarmas de Intrusión' %}selected{% endif %}>Alarmas de Intrusión</option>
+                    <option value="Sistemas Anti Incendios" {% if filtro_servicio == 'Sistemas Anti Incendios' %}selected{% endif %}>Sistemas Anti Incendios</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="orden">Ordenar por:</label>
+                <select id="orden" name="orden" onchange="this.form.submit()">
+                    <option value="fecha_desc" {% if orden == 'fecha_desc' %}selected{% endif %}>Más recientes primero</option>
+                    <option value="fecha_asc" {% if orden == 'fecha_asc' %}selected{% endif %}>Más antiguos primero</option>
+                    <option value="prioridad_desc" {% if orden == 'prioridad_desc' %}selected{% endif %}>Prioridad alta primero</option>
+                    <option value="nombre_asc" {% if orden == 'nombre_asc' %}selected{% endif %}>Orden alfabético</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista de Solicitudes -->
+    <div class="solicitudes-list">
+        {% if solicitudes %}
+            {% for solicitud in solicitudes %}
+            <div class="solicitud-card {% if not solicitud.leido %}unread{% endif %} {{ solicitud.estado }}" id="solicitud-{{ solicitud.id }}">
+                <div class="solicitud-header">
+                    <div class="solicitud-info">
+                        <h3>{{ solicitud.nombre }}</h3>
+                        <div class="solicitud-meta">
+                            <span class="email">{{ solicitud.email }}</span>
+                            <span class="phone">{{ solicitud.telefono }}</span>
+                            <span class="service">{{ solicitud.servicio }}</span>
+                        </div>
+                    </div>
+                    <div class="solicitud-status">
+                        <span class="date">{{ solicitud.fecha }}</span>
+                        <span class="priority priority-{{ solicitud.prioridad }}">
+                            {% if solicitud.prioridad == 3 %}🔥 Alta
+                            {% elif solicitud.prioridad == 2 %}⚠️ Media
+                            {% else %}📋 Baja{% endif %}
+                        </span>
+                        <span class="status status-{{ solicitud.estado }}">
+                            {% if solicitud.estado == 'pendiente' %}⏳ Pendiente
+                            {% elif solicitud.estado == 'contactado' %}✅ Contactado
+                            {% else %}🔒 Cerrado{% endif %}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="solicitud-body">
+                    <div class="message">
+                        <strong>Mensaje:</strong>
+                        <p>{{ solicitud.mensaje }}</p>
+                    </div>
+                    
+                    {% if solicitud.notas %}
+                    <div class="notes">
+                        <strong>Notas:</strong>
+                        <p>{{ solicitud.notas }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if solicitud.fecha_contacto %}
+                    <div class="contact-date">
+                        <strong>Contactado:</strong> {{ solicitud.fecha_contacto }}
+                    </div>
+                    {% endif %}
+                    
+                    {% if solicitud.fecha_cierre %}
+                    <div class="close-date">
+                        <strong>Cerrado:</strong> {{ solicitud.fecha_cierre }}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="solicitud-actions">
+                    {% if not solicitud.leido %}
+                    <button class="btn btn-sm btn-primary mark-read-btn" data-id="{{ solicitud.id }}">
+                        📨 Marcar Leída
+                    </button>
+                    {% endif %}
+                    
+                    <select class="status-select" data-id="{{ solicitud.id }}">
+                        <option value="pendiente" {% if solicitud.estado == 'pendiente' %}selected{% endif %}>⏳ Pendiente</option>
+                        <option value="contactado" {% if solicitud.estado == 'contactado' %}selected{% endif %}>✅ Contactado</option>
+                        <option value="cerrado" {% if solicitud.estado == 'cerrado' %}selected{% endif %}>🔒 Cerrado</option>
+                    </select>
+                    
+                    <button class="btn btn-sm btn-danger delete-btn" data-id="{{ solicitud.id }}">
+                        🗑️ Eliminar
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <h4>No hay solicitudes</h4>
+            <p>No se encontraron solicitudes con los filtros aplicados.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Marcar como leído
+    document.querySelectorAll('.mark-read-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const solicitudId = this.getAttribute('data-id');
+            await updateSolicitudStatus(solicitudId, 'leido');
+        });
+    });
+
+    // Cambiar estado
+    document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', async function() {
+            const solicitudId = this.getAttribute('data-id');
+            const nuevoEstado = this.value;
+            await updateSolicitudEstado(solicitudId, nuevoEstado);
+        });
+    });
+
+    // Eliminar solicitud
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const solicitudId = this.getAttribute('data-id');
+            
+            if (confirm('¿Está seguro de que desea eliminar esta solicitud? Esta acción no se puede deshacer.')) {
+                await deleteSolicitud(solicitudId);
+            }
+        });
+    });
+});
+
+async function updateSolicitudStatus(solicitudId, action) {
+    try {
+        const response = await fetch(`/api/admin/marcar_leido/${solicitudId}`, {
+            method: 'POST'
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            const card = document.getElementById(`solicitud-${solicitudId}`);
+            card.classList.remove('unread');
+            card.querySelector('.mark-read-btn').remove();
+            showNotification('Solicitud marcada como leída', 'success');
+        } else {
+            showNotification('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Error de conexión', 'error');
+    }
+}
+
+async function updateSolicitudEstado(solicitudId, estado) {
+    try {
+        const response = await fetch(`/api/admin/actualizar_estado/${solicitudId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ estado: estado })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            showNotification(`Estado actualizado a ${estado}`, 'success');
+            // Recargar para ver cambios
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            showNotification('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Error de conexión', 'error');
+    }
+}
+
+async function deleteSolicitud(solicitudId) {
+    try {
+        const response = await fetch(`/api/admin/eliminar/${solicitudId}`, {
+            method: 'POST'
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            document.getElementById(`solicitud-${solicitudId}`).remove();
+            showNotification('Solicitud eliminada', 'success');
+            
+            // Si no hay más solicitudes, mostrar estado vacío
+            if (document.querySelectorAll('.solicitud-card').length === 0) {
+                location.reload();
+            }
+        } else {
+            showNotification('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('Error de conexión', 'error');
+    }
+}
+
+function showNotification(message, type) {
+    // Implementar notificación (puede usar una librería o crear un div simple)
+    alert(`${type.toUpperCase()}: ${message}`);
+}
+</script>
+{% endblock %}

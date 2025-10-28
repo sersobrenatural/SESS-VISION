@@ -1,302 +1,237 @@
-# SESS-Vision - Sistema Web de Seguridad Electrónica
-
-Sistema web empresarial profesional para SESS-Vision, empresa de seguridad electrónica con gestión de contactos y panel de administración.
-
-## 🎯 Características
-
-### Página Principal
-- Diseño moderno y profesional
-- Logo corporativo SESS-Vision
-- Sección Hero con llamadas a la acción
-- Catálogo completo de servicios:
-  - **Video Vigilancia**: Cámaras PTZ, reconocimiento facial, térmicas, ocultas
-  - **Controles de Acceso**: Biométricos, cerraduras inteligentes, lectores RFID, barreras vehiculares, detectores de placas, torniquetes
-  - **Alarmas de Intrusión**: Sensores de movimiento inteligente, infrarrojos, pánico, video verificación, GPS con internet
-  - **Sistemas Anti Incendios**: Detectores de humo, gas y fuego
-- Formulario de contacto funcional
-- Diseño responsive
-
-### Panel de Administración
-- Sistema de autenticación seguro
-- Dashboard con estadísticas en tiempo real
-- Gestión completa de mensajes
-- Interfaz profesional
-
-### Base de Datos
-- SQLite para almacenamiento persistente
-- Gestión automática de mensajes
-- Sistema de marcado de lectura
-
-## 📦 Estructura del Proyecto (Patrón MVC)
-
-```
-sessvision/
-├── app/                      # Paquete principal de la aplicación
-│   ├── __init__.py          # Factory de la aplicación Flask
-│   ├── config.py            # Configuraciones (Dev, Prod, Test)
-│   ├── models.py            # Modelos de base de datos
-│   ├── routes.py            # Rutas públicas
-│   ├── auth.py              # Autenticación y rutas protegidas
-│   ├── static/              # Archivos estáticos
-│   │   ├── css/
-│   │   ├── js/
-│   │   └── images/
-│   │       └── logo.svg
-│   └── templates/           # Plantillas HTML
-│       ├── index.html
-│       └── admin.html
-├── instance/                 # Datos de instancia (DB, configuración local)
-│   └── sessvision.db        # Base de datos SQLite (auto-generada)
-├── run.py                    # Punto de entrada de la aplicación
-├── requirements.txt          # Dependencias de Python
-├── .env.example              # Plantilla de variables de entorno
-├── .gitignore                # Archivos ignorados por Git
-├── README.md                 # Este archivo
-└── DEPLOY.md                 # Guía de despliegue en producción
-```
-
-## 🚀 Instalación y Configuración
-### Requisitos
-- Python 3.8 o superior
-- pip o uv
-
-### Pasos de Instalación
-
-#### 1. Clonar o descargar el proyecto
-```bash
-cd sessvision
-```
-
-#### 2. Crear entorno virtual (recomendado)
-```bash
-python -m venv venv
-
-# Linux/Mac
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-```
-
-#### 3. Instalar dependencias
-```bash
-pip install -r requirements.txt
-```
-
-#### 4. Configurar variables de entorno
-
-Copia el archivo de ejemplo y edítalo con tus credenciales:
-
-```bash
-cp .env.example .env
-```
-
-Edita `.env`:
-```bash
-FLASK_ENV=development
-FLASK_DEBUG=True
-SECRET_KEY=tu-secret-key-muy-segura
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=tu-password-segura
-```
-
-**Generar SECRET_KEY segura:**
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
-
-#### 5. Iniciar el servidor
-
-**Modo desarrollo:**
-```bash
-python run.py
-```
-
-**Modo producción con Gunicorn:**
-```bash
-pip install gunicorn
-gunicorn -w 4 -b 0.0.0.0:5000 "app:create_app()"
-```
-
-#### 6. Acceder a la aplicación
-- Página principal: http://localhost:5000
-- Panel de administración: http://localhost:5000/admin
-
-**Credenciales por defecto:**
-- Usuario: `admin`
-- Contraseña: `admin123`
-
-⚠️ **IMPORTANTE**: Cambia las credenciales antes de desplegar en producción.
-
-## 📡 API Endpoints
-
-### Endpoints Públicos
-
-#### `POST /api/contacto`
-Envía un mensaje de contacto.
-
-**Body:**
-```json
-{
-  "nombre": "Juan Pérez",
-  "email": "juan@example.com",
-  "telefono": "+34 600 000 000",
-  "servicio": "Video Vigilancia",
-  "mensaje": "Solicito información sobre cámaras PTZ"
-}
-```
-
-### Endpoints de Administración
-#### `POST /api/admin/login`
-Inicia sesión y obtiene token de autenticación.
-
-**Body:**
-```json
-{
-  "username": "admin",
-  "password": "admin123"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "Login exitoso",
-  "token": "abc123..."
-}
-```
+# 🔒 SESS-Vision - Sistema de Seguridad Electrónica
 
-#### `GET /api/admin/messages`
-Obtiene todos los mensajes (requiere autenticación).
-
-**Headers:**
-```
-Authorization: Bearer {token}
-```
-
-#### `PUT /api/admin/messages/{id}/read`
-Marca un mensaje como leído.
-
-#### `DELETE /api/admin/messages/{id}`
-Elimina un mensaje.
-
-## 🛠️ Tecnologías
-
-### Backend
-- **Flask 3.0** - Framework web
-- **SQLite** - Base de datos
-- **Werkzeug** - Utilidades WSGI
-- **Python 3.8+** - Lenguaje de programación
-
-### Frontend
-- **HTML5** - Estructura
-- **CSS3** - Estilos (Custom Properties)
-- **JavaScript (Vanilla)** - Interactividad
-- **Google Fonts (Inter)** - Tipografía
-- **SVG** - Iconografía
+📋 Tabla de Contenidos
 
-### Arquitectura
-- **Application Factory Pattern** - Patrón de diseño Flask
-- **Blueprints** - Modularización de rutas
-- **MVC Pattern** - Separación de responsabilidades
+Introducción
 
-## 🔒 Seguridad
+Propósito del Sistema
 
-- Contraseñas hasheadas con SHA-256
-- Tokens de autenticación basados en secrets
-- Validación de datos en servidor
-- Protección contra inyección SQL (parametrización)
-- Variables de entorno para secretos
-- CORS configurado
-- Headers de seguridad
+Servicios Ofrecidos
 
-## 📄 Base de Datos
+Características Técnicas
 
-### Tabla: `mensajes`
+Instalación y Configuración
 
-| Campo    | Tipo      | Descripción              | Restricciones |
-|----------|-----------|---------------------------|---------------|
-| id       | INTEGER   | Identificador único      | PRIMARY KEY   |
-| nombre   | TEXT      | Nombre del cliente        | NOT NULL      |
-| email    | TEXT      | Correo electrónico       | NOT NULL      |
-| telefono | TEXT      | Teléfono de contacto     | NOT NULL      |
-| servicio | TEXT      | Servicio de interés     | NOT NULL      |
-| mensaje  | TEXT      | Contenido del mensaje     | NOT NULL      |
-| fecha    | TIMESTAMP | Fecha y hora de envío    | DEFAULT NOW   |
-| leido    | BOOLEAN   | Estado de lectura         | DEFAULT FALSE |
+Panel de Administración
 
-## 🌐 Despliegue en Producción
+Estructura del Proyecto
 
-Consulta el archivo <filepath>DEPLOY.md</filepath> para instrucciones detalladas de despliegue con:
+Tecnologías Utilizadas
 
-- Gunicorn + Systemd
-- Nginx como proxy reverso
-- Docker
-- Configuración HTTPS
-- Optimizaciones de rendimiento
+🏢 Introducción
+SESS-Vision es una empresa líder en soluciones integrales de seguridad electrónica con más de 10 años de experiencia en el mercado. Nos especializamos en proteger lo que más valoras mediante tecnología de vanguardia y servicio excepcional.
 
-## 🎨 Personalización
+Misión: Brindar seguridad y tranquilidad a nuestros clientes mediante sistemas electrónicos confiables y soporte técnico especializado las 24 horas.
 
-### Cambiar Colores del Tema
+Visión: Ser la empresa de referencia en seguridad electrónica, reconocida por nuestra innovación tecnológica y excelencia en servicio al cliente.
 
-Edita las variables CSS en `app/templates/index.html` y `admin.html`:
+🎯 Propósito del Sistema
+El sistema web SESS-Vision está diseñado para:
 
-```css
-:root {
-    --primary-500: #0066CC;  /* Color principal */
-    --primary-700: #004C99;  /* Color hover */
-    --neutral-900: #0F172A;  /* Texto principal */
-}
-```
+📞 Centralizar solicitudes de clientes interesados en nuestros servicios
 
-### Añadir Nuevos Servicios
+⚡ Agilizar la cotización y contacto con prospectos
 
-Edita `app/templates/index.html` dentro de la sección `.services-grid`.
+📊 Gestionar eficientemente el pipeline de ventas y servicios
 
-### Modificar el Logo
+🔐 Proporcionar un panel administrativo para seguimiento de leads
 
-Reemplaza `app/static/images/logo.svg` con tu logo personalizado.
+🌐 Ofrecer información detallada sobre nuestros servicios de seguridad
 
-## 📚 Documentación Adicional
+🛡️ Servicios Ofrecidos
+1. 📹 Video Vigilancia
+Sistemas de monitoreo visual con tecnología avanzada para máxima seguridad.
 
-- <filepath>DEPLOY.md</filepath> - Guía de despliegue en producción
-- <filepath>.env.example</filepath> - Variables de entorno disponibles
-- <filepath>app/config.py</filepath> - Configuraciones del sistema
+Características:
 
-## 📝 Scripts Útiles
+Cámaras 4K Ultra HD con visión nocturna
 
-### Crear secret key
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
+Reconocimiento facial e inteligencia artificial
 
-### Hash de contraseña (para variables de entorno)
-```bash
-echo -n 'mi_password' | sha256sum | cut -d' ' -f1
-```
+Monitoreo remoto desde cualquier dispositivo
 
-### Backup de base de datos
-```bash
-cp instance/sessvision.db instance/backup_$(date +%Y%m%d_%H%M%S).db
-```
+Almacenamiento en la nube y local
 
-### Ver logs en producción (systemd)
-```bash
-sudo journalctl -u sessvision -f
-```
+Cámaras PTZ, térmicas y ocultas
 
-## 🤝 Soporte
+Aplicaciones:
 
-Para soporte técnico o consultas:
-- Email: soporte@sess-vision.com
-- Web: www.sess-vision.com
+🏠 Residencial: Protección de hogares y familias
 
-## 📜 Licencia
+🏢 Comercial: Seguridad para negocios y comercios
 
-© 2025 SESS-Vision - Seguridad Electrónica Profesional. Todos los derechos reservados.
+🏭 Industrial: Monitoreo de plantas y almacenes
 
----
+🎓 Institucional: Protección de escuelas y oficinas
 
-**Sistema listo para producción ✅**
+2. 🚪 Controles de Acceso
+Sistemas inteligentes para gestión segura de accesos.
 
-Diseñado y desarrollado con ❤️ por el equipo de SESS-Vision.
+Tecnologías:
+
+👆 Biometría: Huella digital y reconocimiento facial
+
+💳 RFID: Tarjetas y tags de proximidad
+
+📱 Control Remoto: Gestión desde dispositivos móviles
+
+⚙️ Integración: Compatible con sistemas existentes
+
+Beneficios:
+
+Control de acceso en tiempo real
+
+Registro detallado de entradas/salidas
+
+Bloqueo inmediato de credenciales
+
+Reportes automáticos de actividad
+
+3. 🚨 Alarmas de Intrusión
+Protección perimetral y volumétrica avanzada.
+
+Componentes:
+
+Sensores de movimiento de alta precisión
+
+Contactos magnéticos para puertas/ventanas
+
+Sirenas internas y externas
+
+Botones de pánico estratégicos
+
+Monitoreo 24/7 con respuesta inmediata
+
+Niveles de Protección:
+
+Perimetral: Detección en puntos de acceso
+
+Volumétrica: Protección de espacios internos
+
+Panic: Alertas de emergencia inmediatas
+
+4. 🔥 Sistemas Anti Incendios
+Detección temprana y prevención de incendios.
+
+Sistemas de Detección:
+
+💨 Sensores de humo fotoeléctricos e iónicos
+
+🌡️ Detectores de calor termovelocimétricos
+
+🔥 Detectores de llamas por ultravioleta
+
+🚨 Alertas automáticas a bomberos
+
+Sistemas de Extinción:
+
+Rociadores automáticos
+
+Sistemas de gases inertes
+
+Extintores portátiles y murales
+
+Señalización y planes de evacuación
+
+👨‍💼 Panel de Administración
+Dashboard Principal
+📊 Estadísticas de solicitudes
+
+📈 Gráficos de servicios más solicitados
+
+🔔 Notificaciones de solicitudes nuevas
+
+📅 Resumen de actividad reciente
+
+Gestión de Solicitudes
+📋 Lista completa de solicitudes de clientes
+
+🏷️ Filtros por estado y servicio
+
+✏️ Cambio de estados (Pendiente → Contactado → Cerrado)
+
+📧 Información de contacto de clientes
+
+🗑️ Eliminación de solicitudes antiguas
+
+Estados de Solicitudes
+⏳ Pendiente: Nueva solicitud sin revisar
+
+✅ Contactado: Cliente ya ha sido contactado
+
+🔒 Cerrado: Solicitud procesada/completada
+
+⚙️ Características Técnicas
+Frontend
+Diseño Responsive - Compatible con todos los dispositivos
+
+Interfaz Moderna - Diseño limpio y profesional
+
+Accesibilidad - Cumple con estándares WCAG
+
+Optimización SEO - Estructura semántica para mejor posicionamiento
+
+Backend
+Framework Flask - Ligero y eficiente
+
+Base de Datos SQLite - Fácil implementación y mantenimiento
+
+Autenticación Segura - Sistema de login con hash de contraseñas
+
+APIs RESTful - Arquitectura escalable
+
+Seguridad
+🔐 Autenticación de administradores
+
+🛡️ Headers de seguridad HTTP
+
+📝 Logs del sistema
+
+🔄 Controles de sesión
+
+🚀 Instalación y Configuración
+Prerrequisitos
+Python 3.8 o superior
+
+pip (gestor de paquetes de Python)
+
+Backend
+Flask - Microframework web Python
+
+SQLite - Base de datos ligera
+
+Werkzeug - Utilidades WSGI y seguridad
+
+Jinja2 - Motor de plantillas
+
+Frontend
+HTML5 - Estructura semántica
+
+CSS3 - Estilos y diseño responsive
+
+JavaScript - Interactividad del cliente
+
+Chart.js - Gráficos y visualizaciones
+
+Seguridad
+Hash de contraseñas - Almacenamiento seguro
+
+Sesiones seguras - Manejo de autenticación
+
+Headers de seguridad - Protección HTTP
+
+Validación de entrada - Prevención de inyecciones
+
+📞 Contacto y Soporte
+SESS-Vision - Seguridad Electrónica Profesional
+
+📍 Dirección: Av. Abilio Balboa, Malabo
+
+📞 Teléfono: +240-222-473972
+
+✉️ Email: info@sessvision.com
+
+🕒 Horarios: Lun-Vie 8:00-18:00 | Sáb 9:00-14:00
+
+© 2024 SESS-Vision - Todos los derechos reservados.
+Protegiendo lo que más valoras con tecnología y confianza.

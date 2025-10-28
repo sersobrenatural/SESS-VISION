@@ -157,5 +157,9 @@
             .dropdown-content { display: block; position: static; }
         </style>
     </noscript>
+    {% if request.path.startswith('/admin') %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}?v={{ config.STATIC_VERSION }}">
+    <script src="{{ url_for('static', filename='js/admin.js') }}?v={{ config.STATIC_VERSION }}" defer></script>
+    {% endif %}
 </body>
 </html>
