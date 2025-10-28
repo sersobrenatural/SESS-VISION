@@ -1,0 +1,16 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield Icon -->
+  <path d="M20 8L30 4L40 8V20C40 28 35 34 30 38C25 34 20 28 20 20V8Z" fill="#0066CC" stroke="#0066CC" stroke-width="2"/>
+  <!-- Camera/Eye Element -->
+  <circle cx="30" cy="20" r="4" fill="white"/>
+  <circle cx="30" cy="20" r="2" fill="#0066CC"/>
+  
+  <!-- SESS Text -->
+  <text x="50" y="28" font-family="Arial, sans-serif" font-weight="800" font-size="24" fill="#0F172A">SESS</text>
+  
+  <!-- Vision Text -->
+  <text x="50" y="45" font-family="Arial, sans-serif" font-weight="600" font-size="16" fill="#0066CC">VISION</text>
+  
+  <!-- Subtitle -->
+  <text x="50" y="55" font-family="Arial, sans-serif" font-weight="400" font-size="8" fill="#94A3B8" letter-spacing="0.5">SEGURIDAD ELECTRÓNICA</text>
+</svg>

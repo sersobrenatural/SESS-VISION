@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SESS-Vision | Seguridad Electrónica Profesional{% endblock %}</title>
+    <meta name="description" content="SESS-Vision - Soluciones profesionales en seguridad electrónica. Video vigilancia, controles de acceso, alarmas de intrusión y sistemas anti incendios.">
+    <meta name="keywords" content="seguridad electrónica, video vigilancia, alarmas, controles de acceso, sistemas anti incendios">
+    <meta name="author" content="SESS-Vision">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ url_for('static', filename='css/main.css') }}?v={{ config.STATIC_VERSION }}" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?v={{ config.STATIC_VERSION }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SESS-Vision",
+        "description": "Soluciones profesionales en seguridad electrónica",
+        "url": "https://sessvision.com",
+        "telephone": "+240-222-473972",
+        "email": "info@sessvision.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Malabo",
+            "addressLocality": "Ciudad"
+        },
+        "serviceType": [
+            "Video Vigilancia",
+            "Controles de Acceso", 
+            "Alarmas de Intrusión",
+            "Sistemas Anti Incendios"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
+    <!-- Navigation -->
+    <header role="banner">
+        <nav class="navbar" role="navigation" aria-label="Navegación principal">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="{{ url_for('main.index') }}" class="logo-link" aria-label="SESS-Vision - Página de inicio">
+                        <div class="logo-icon" aria-hidden="true">🔒</div>
+                        <div class="logo-text">
+                            <span class="logo-main">SESS-VISION</span>
+                            <span class="logo-sub">SEGURIDAD ELECTRÓNICA</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a href="{{ url_for('main.index') }}" class="nav-link" role="menuitem">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown" role="none">
+                        <a href="#servicios" class="nav-link dropbtn" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                            Servicios <span aria-hidden="true">▾</span>
+                        </a>
+                        <ul class="dropdown-content" role="menu" aria-label="Submenú de servicios">
+                            <li role="none"><a href="{{ url_for('main.video_vigilancia') }}" role="menuitem">📹 Video Vigilancia</a></li>
+                            <li role="none"><a href="{{ url_for('main.controles_acceso') }}" role="menuitem">🚪 Controles de Acceso</a></li>
+                            <li role="none"><a href="{{ url_for('main.alarmas_intrusion') }}" role="menuitem">🚨 Alarmas de Intrusión</a></li>
+                            <li role="none"><a href="{{ url_for('main.sistemas_anti_incendios') }}" role="menuitem">🔥 Sistemas Anti Incendios</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#nosotros" class="nav-link" role="menuitem">Nosotros</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#contacto" class="nav-link" role="menuitem">Contacto</a>
+                    </li>
+                </ul>
+                
+                <button class="hamburger" aria-label="Menú móvil" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon" aria-hidden="true">🔒</div>
+                        <div class="logo-text">
+                            <span class="logo-main">SESS-VISION</span>
+                            <span class="logo-sub">SEGURIDAD ELECTRÓNICA</span>
+                        </div>
+                    </div>
+                    <p>Protegiendo su patrimonio con tecnología de vanguardia y servicio excepcional.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main.video_vigilancia') }}">Video Vigilancia</a></li>
+                        <li><a href="{{ url_for('main.controles_acceso') }}">Controles de Acceso</a></li>
+                        <li><a href="{{ url_for('main.alarmas_intrusion') }}">Alarmas de Intrusión</a></li>
+                        <li><a href="{{ url_for('main.sistemas_anti_incendios') }}">Sistemas Anti Incendios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main.index') }}">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <address>
+                        <ul>
+                            <li>📞 <a href="tel:+15551234567">+240-222-473972</a></li>
+                            <li>✉️ <a href="mailto:info@sessvision.com">info@sessvision.com</a></li>
+                            <li>🏢 Malabo, Ciudad</li>
+                        </ul>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SESS-Vision - Seguridad Electrónica Profesional. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}?v={{ config.STATIC_VERSION }}" defer></script>
+    {% block scripts %}{% endblock %}
+    
+    <!-- No-JS fallback -->
+    <noscript>
+        <style>
+            .navbar { position: relative; }
+            .dropdown-content { display: block; position: static; }
+        </style>
+    </noscript>
+</body>
+</html>

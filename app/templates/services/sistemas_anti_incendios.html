@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Sistemas Anti Incendios - SESS-Vision{% endblock %}
+
+{% block content %}
+<section class="service-detail">
+    <div class="container">
+        <div class="service-header">
+            <h1>Sistemas Anti Incendios</h1>
+            <p class="service-subtitle">Detección temprana y prevención de incendios</p>
+        </div>
+
+        <div class="service-content">
+            <div class="service-hero">
+                <div class="service-image">
+                    <div class="image-placeholder">
+                        <span>🔥 Imagen de Sistema Anti Incendios</span>
+                    </div>
+                </div>
+                <div class="service-highlights">
+                    <h2>Protección Contra Incendios Avanzada</h2>
+                    <p>Sistemas de detección temprana de humo, calor y llamas con protocolos de extinción automática y notificación inmediata a bomberos.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">💨</div>
+                            <div class="feature-text">
+                                <strong>Detección de Humo</strong>
+                                <span>Sensores fotoeléctricos y iónicos</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌡️</div>
+                            <div class="feature-text">
+                                <strong>Detección de Calor</strong>
+                                <span>Termostatos y termovelocimétricos</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🚒</div>
+                            <div class="feature-text">
+                                <strong>Extinción Automática</strong>
+                                <span>Sistemas de rociadores y gases</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-cta">
+                <div class="cta-content">
+                    <h3>¿Necesita protección contra incendios?</h3>
+                    <p>Contáctenos para una evaluación personalizada sin costo</p>
+                    <a href="{{ url_for('main.index') }}#contacto" class="btn btn-primary">Solicitar Asesoría</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="title-line">Protegemos lo que</span>
+            <span class="title-line highlight">más valoras</span>
+        </h1>
+        <p class="hero-description">
+            Soluciones integrales de seguridad electrónica con tecnología de última generación 
+            para empresas, hogares y espacios comerciales.
+        </p>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number" data-count="500">0</div>
+                <div class="stat-label">Clientes Satisfechos</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-count="24">0</div>
+                <div class="stat-label">Soporte 24/7</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-count="10">0</div>
+                <div class="stat-label">Años de Experiencia</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview Section -->
+<section id="servicios" class="services-preview">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Soluciones completas de seguridad electrónica</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Video Vigilancia -->
+            <div class="service-preview-card">
+                <div class="service-icon">📹</div>
+                <h3>Video Vigilancia</h3>
+                <p>Sistemas de monitoreo visual con tecnología avanzada para máxima seguridad</p>
+                <div class="service-features">
+                    <span class="feature-tag">Cámaras 4K</span>
+                    <span class="feature-tag">Reconocimiento Facial</span>
+                    <span class="feature-tag">Monitoreo Remoto</span>
+                </div>
+                <a href="{{ url_for('main.video_vigilancia') }}" class="btn btn-outline">Ver Detalles</a>
+            </div>
+
+            <!-- Controles de Acceso -->
+            <div class="service-preview-card">
+                <div class="service-icon">🚪</div>
+                <h3>Controles de Acceso</h3>
+                <p>Sistemas inteligentes para gestión y control de accesos seguros</p>
+                <div class="service-features">
+                    <span class="feature-tag">Biometría</span>
+                    <span class="feature-tag">RFID</span>
+                    <span class="feature-tag">Control Remoto</span>
+                </div>
+                <a href="{{ url_for('main.controles_acceso') }}" class="btn btn-outline">Ver Detalles</a>
+            </div>
+
+            <!-- Alarmas de Intrusión -->
+            <div class="service-preview-card">
+                <div class="service-icon">🚨</div>
+                <h3>Alarmas de Intrusión</h3>
+                <p>Protección perimetral y volumétrica con alertas inmediatas</p>
+                <div class="service-features">
+                    <span class="feature-tag">Sensores</span>
+                    <span class="feature-tag">Botón Pánico</span>
+                    <span class="feature-tag">Monitoreo 24/7</span>
+                </div>
+                <a href="{{ url_for('main.alarmas_intrusion') }}" class="btn btn-outline">Ver Detalles</a>
+            </div>
+
+            <!-- Sistemas Anti Incendios -->
+            <div class="service-preview-card">
+                <div class="service-icon">🔥</div>
+                <h3>Sistemas Anti Incendios</h3>
+                <p>Detección temprana y prevención de incendios automática</p>
+                <div class="service-features">
+                    <span class="feature-tag">Detección Humo</span>
+                    <span class="feature-tag">Alerta Temprana</span>
+                    <span class="feature-tag">Extinción Auto</span>
+                </div>
+                <a href="{{ url_for('main.sistemas_anti_incendios') }}" class="btn btn-outline">Ver Detalles</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="nosotros" class="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-content">
+                <h2>Expertos en Seguridad Electrónica</h2>
+                <p>Con más de una década de experiencia, SESS-Vision se ha consolidado como líder en soluciones de seguridad electrónica, brindando protección confiable a empresas, hogares e instituciones.</p>
+                
+                <div class="expertise-list">
+                    <div class="expertise-item">
+                        <span class="check-icon">✅</span>
+                        <span>Certificaciones internacionales</span>
+                    </div>
+                    <div class="expertise-item">
+                        <span class="check-icon">✅</span>
+                        <span>Equipo técnico especializado</span>
+                    </div>
+                    <div class="expertise-item">
+                        <span class="check-icon">✅</span>
+                        <span>Soporte técnico 24/7</span>
+                    </div>
+                    <div class="expertise-item">
+                        <span class="check-icon">✅</span>
+                        <span>Garantía extendida en todos nuestros sistemas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="certification-badges">
+                    <div class="badge">ISO 9001</div>
+                    <div class="badge">UL Certified</div>
+                    <div class="badge">CE Certified</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contacto" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Solicitar Servicio</h2>
+            <p class="section-subtitle">Contáctenos para una evaluación personalizada</p>
+        </div>
+        
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <strong>Teléfono</strong>
+                        <span>+240-222-473972</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <strong>Email</strong>
+                        <span>info@sessvision.com</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <div class="contact-details">
+                        <strong>Dirección</strong>
+                        <span>Av. Abilio Balboa, Malabo</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div class="contact-details">
+                        <strong>Horarios</strong>
+                        <span>Lun - Vie: 8:00 - 18:00</span>
+                        <span>Sáb: 9:00 - 14:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="solicitudForm" class="modern-form">
+                    <div id="alert" class="alert"></div>
+                    
+                    <div class="form-group">
+                        <input type="text" id="nombre" name="nombre" required>
+                        <label for="nombre">Nombre Completo *</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Correo Electrónico *</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="telefono" name="telefono" required>
+                        <label for="telefono">Teléfono *</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="servicio" name="servicio" required>
+                            <option value=""></option>
+                            <option value="Video Vigilancia">Video Vigilancia</option>
+                            <option value="Controles de Acceso">Controles de Acceso</option>
+                            <option value="Alarmas de Intrusión">Alarmas de Intrusión</option>
+                            <option value="Sistemas Anti Incendios">Sistemas Anti Incendios</option>
+                            <option value="Consulta General">Consulta General</option>
+                        </select>
+                        <label for="servicio">Servicio de Interés *</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                        <label for="mensaje">Mensaje o Requerimientos *</label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Enviar Solicitud</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

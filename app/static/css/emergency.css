@@ -1,0 +1,43 @@
+/* SOLUCIÓN NUCLEAR - Reset total */
+* {
+    all: unset;
+    display: revert;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+}
+
+/* Reconstruir navegación desde cero */
+.navbar {
+    background: #1a365d !important;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}

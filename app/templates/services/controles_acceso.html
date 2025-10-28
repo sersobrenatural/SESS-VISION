@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Controles de Acceso - SESS-Vision{% endblock %}
+
+{% block content %}
+<section class="service-detail">
+    <div class="container">
+        <div class="service-header">
+            <h1>Controles de Acceso</h1>
+            <p class="service-subtitle">Sistemas inteligentes para gestión segura de accesos</p>
+        </div>
+
+        <div class="service-content">
+            <div class="service-hero">
+                <div class="service-image">
+                    <div class="image-placeholder">
+                        <span>🚪 Imagen de Sistema de Control de Acceso</span>
+                    </div>
+                </div>
+                <div class="service-highlights">
+                    <h2>Acceso Seguro y Controlado</h2>
+                    <p>Implementamos sistemas de control de acceso que garantizan la seguridad de sus instalaciones mediante tecnología biométrica, tarjetas RFID y control remoto.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">👆</div>
+                            <div class="feature-text">
+                                <strong>Biometría</strong>
+                                <span>Huella digital y reconocimiento facial</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">💳</div>
+                            <div class="feature-text">
+                                <strong>RFID</strong>
+                                <span>Tarjetas y tags de proximidad</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">📱</div>
+                            <div class="feature-text">
+                                <strong>Control Remoto</strong>
+                                <span>Gestión desde cualquier dispositivo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-cta">
+                <div class="cta-content">
+                    <h3>¿Necesita un sistema de control de acceso?</h3>
+                    <p>Contáctenos para una evaluación personalizada sin costo</p>
+                    <a href="{{ url_for('main.index') }}#contacto" class="btn btn-primary">Solicitar Asesoría</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
